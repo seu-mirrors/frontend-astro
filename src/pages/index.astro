@@ -1,0 +1,18 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+import Header from "../components/Header.svelte";
+import Footer from "../components/Footer.svelte";
+
+import Home from "./Home.svelte";
+
+import "../app.css"
+---
+
+<Layout title="东南大学开源镜像站 / SEU Mirrors">
+	<Header client:only="svelte"/>
+	<div class="caddy-wrapper flex flex-wrap bg-white text-neutral-900 gap-0 lg:divide-x max-lg:divide-y caddy-main grow">
+		<Home client:only="svelte"/>
+	</div>
+	<Footer client:only="svelte"/>
+</Layout>

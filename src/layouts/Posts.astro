@@ -1,0 +1,40 @@
+---
+import {Icon, Newspaper} from "svelte-hero-icons";
+const { frontmatter } = Astro.props;
+
+import Header from "../components/Header.svelte";
+import Footer from "../components/Footer.svelte";
+import '../app.css'
+---
+<html lang="zh">
+<head>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{frontmatter.title} - 东南大学开源镜像站 / SEU Mirrors</title>
+</head>
+<body>
+<main class="flex flex-col min-h-screen">
+    <Header client:only="svelte"/>
+
+    <div class="caddy-wrapper flex flex-wrap bg-white text-neutral-900 gap-0 lg:divide-x max-lg:divide-y caddy-main grow">
+        <div class="px-4 py-3 flex flex-col w-full">
+            <p class="font-medium text-xl flex items-center">
+                <Icon class="w-6 h-6 mr-2" src={Newspaper} solid />
+                新闻通知 - { frontmatter.title }
+            </p>
+            <p>作者：{frontmatter.author}</p>
+            <p>日期：{frontmatter.pubDate}</p>
+            <p>摘要：{ frontmatter.description }</p>
+            <div class="py-6">
+                <div class="basis-full rounded px-6">
+                    <slot />
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <Footer client:only="svelte"/>
+</main>
+</body>
+</html>
+

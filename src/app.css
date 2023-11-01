@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
+:root {
+  /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400; */
+
+  color-scheme: light;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #f4f6f7;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+@layer utilities {
+  .caddy-shadow {
+    box-shadow: 0px 0px 20px 0px rgb(0 0 0 / 10%);
+  }
+
+  .caddy-wrapper {
+    @apply mx-auto max-w-caddy w-full;
+  }
+
+  .caddy-main {
+    margin: 3em auto;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px 1px rgb(0 0 0 / 5%);
+  }
+
+  .header-nav > a {
+    @apply no-underline hover:no-underline p-2 border-2 border-transparent;
+  }
+
+  .header-nav > a.active {
+    @apply border-slate-300 border-solid rounded-lg;
+  }
+}
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.3em;
+  vertical-align: super;
+}
+
+sub {
+  bottom: -0.25em;
+  vertical-align: sub;
+}
+
+a:hover {
+  @apply underline underline-offset-2
+}
+
+/* a:hover {
+  @apply no-underline
+} */
+
+/* a[href]:where(
+    [href^="//"],
+    [href^="http://"],
+    [href^="https://"],
+):after {
+  content: ' ↗️';
+} */

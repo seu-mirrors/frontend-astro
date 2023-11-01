@@ -1,0 +1,86 @@
+<script>
+  import { Icon, Megaphone, Link, InformationCircle } from "svelte-hero-icons";
+  import ExternalLink from "./ExternalLink.svelte";
+</script>
+
+<aside class="flex flex-col divide-y">
+  <div class="px-4 py-3 space-y-2">
+    <p class="font-medium text-xl flex items-center">
+      <Icon class="w-6 h-6 mr-2" src={InformationCircle} />
+      试运行
+    </p>
+
+    <section class="space-y-2">
+      <div class="flex items-center">
+        <p>东南大学镜像站目前正处于试运行阶段，对于使用中所遇到的任何问题和需求，还请不吝提出。</p>
+      </div>
+    </section>
+  </div>
+
+  <div class="px-4 py-3 space-y-2">
+    <p class="font-medium text-xl flex items-center">
+      <Icon class="w-6 h-6 mr-2" src={Link} />
+      相关链接
+    </p>
+
+    <div class="space-y-4">
+      <section>
+        <ul class="space-y-1">
+          <li>
+            <ExternalLink
+              href="https://github.com/seu-mirrors/issues/issues/new?assignees=&labels=Mirror+Request&projects=&template=1-mirror_request.yaml&title=%5B%E9%95%9C%E5%83%8F%E8%AF%B7%E6%B1%82%5D+">
+              新增镜像 (GitHub)
+            </ExternalLink>
+
+            或
+
+            <ExternalLink
+              href="https://gitlab.seu.edu.cn/mirrors/issues/-/issues/new?issuable_template=1-mirror_request">
+              校内 GitLab
+            </ExternalLink>
+          </li>
+          <li>
+            <ExternalLink
+              href="https://github.com/seu-mirrors/issues/issues/new?assignees=&labels=Service+Issue&projects=&template=2-bug_report.yaml">
+              反馈 Bug (GitHub)
+            </ExternalLink>
+
+            或
+
+            <ExternalLink
+              href="https://gitlab.seu.edu.cn/mirrors/issues/-/issues/new?issuable_template=2-bug_report">
+              校内 GitLab
+            </ExternalLink>
+          </li>
+          <li>
+            <ExternalLink href="https://qm.qq.com/q/ZY12C3R8qe">
+              镜像站用户群 (QQ)
+            </ExternalLink>
+          </li>
+
+          <li>
+            <ExternalLink href="mailto:mirrors@seumsc.com">
+              通过邮件联系
+            </ExternalLink>
+          </li>
+        </ul>
+      </section>
+
+      <section class="space-y-1">
+        <p class="font-medium text-sm">SEU Mirrors 维护了一些开源项目。</p>
+        <ul class="space-y-1">
+          <li>
+            <ExternalLink href="https://github.com/seu-mirrors/tunasync">
+              镜像同步管理器 (tunasync-based)
+            </ExternalLink>
+          </li>
+          <li>
+            <ExternalLink href="https://github.com/seu-mirrors/frontend">
+              镜像站前端源码
+            </ExternalLink>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</aside>
