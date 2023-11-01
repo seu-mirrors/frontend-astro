@@ -1,9 +1,28 @@
 <script>
-  import { Icon, Megaphone, Link, InformationCircle } from "svelte-hero-icons";
+  import { Icon, Link, InformationCircle, Newspaper} from "svelte-hero-icons";
   import ExternalLink from "./ExternalLink.svelte";
+
+  export let postsNames, postsUrls;
 </script>
 
 <aside class="flex flex-col divide-y">
+  <div class="px-4 py-3 space-y-2">
+    <p class="font-medium text-xl flex items-center">
+      <Icon class="w-6 h-6 mr-2" src={Newspaper} />
+      新闻通知
+    </p>
+
+    <section class="space-y-2">
+      <div class="flex items-center">
+        <ul>
+          {#each postsNames as postName, i}
+            <li>●&nbsp;<a href={postsUrls[i]}>{postName}</a></li>
+          {/each}
+        </ul>
+      </div>
+    </section>
+  </div>
+
   <div class="px-4 py-3 space-y-2">
     <p class="font-medium text-xl flex items-center">
       <Icon class="w-6 h-6 mr-2" src={InformationCircle} />

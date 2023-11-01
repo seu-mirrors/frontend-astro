@@ -7,12 +7,20 @@ import Footer from "../components/Footer.svelte";
 import Home from "./Home.svelte";
 
 import "../app.css"
+
+let allPosts = await Astro.glob('./news/p-*.md');
+allPosts.reverse();
+allPosts = allPosts.slice(0, 5);
+
+let fiveNames = [];
+let fiveUrls = [];
+allPosts.map(posts => {fiveNames.push(posts.frontmatter.title); fiveUrls.push(posts.url)})
 ---
 
 <Layout title="东南大学开源镜像站 / SEU Mirrors">
 	<Header client:only="svelte"/>
 	<div class="caddy-wrapper flex flex-wrap bg-white text-neutral-900 gap-0 lg:divide-x max-lg:divide-y caddy-main grow">
-		<Home client:only="svelte"/>
+		<Home postsNames={fiveNames} postsUrls={fiveUrls} client:only="svelte"/>
 	</div>
 	<Footer client:only="svelte"/>
 </Layout>
