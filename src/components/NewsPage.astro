@@ -1,9 +1,10 @@
 ---
 const { title, url, description, pubdate, author } = Astro.props;
+import ExternalLink from "./ExternalLink.svelte";
 ---
 
 <tr>
-	<th><a href={ url }>{ title }</a></th>
+	<th><ExternalLink href={url}>{title}</ExternalLink></th>
 	<th>{ description }</th>
 	<th>{ pubdate }</th>
 	<th>{ author }</th>

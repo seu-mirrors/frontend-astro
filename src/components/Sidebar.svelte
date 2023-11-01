@@ -16,7 +16,7 @@
       <div class="flex items-center">
         <ul>
           {#each postsNames as postName, i}
-            <li>●&nbsp;<a href={postsUrls[i]}>{postName}</a></li>
+            <ExternalLink href={postsUrls[i]} isArticle={true}>{postName}</ExternalLink>
           {/each}
         </ul>
       </div>
