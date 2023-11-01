@@ -5,12 +5,12 @@
 
   import '../app.css'
 
-  export let postsNames, postsUrls;
+  export let postsNames, postsUrls, postsDates;
 </script>
 
 <div class="basis-full lg:basis-2/3">
   <MirrorList />
 </div>
 <div class="basis-full lg:basis-1/3">
-  <Sidebar postsNames = {postsNames} postsUrls = {postsUrls}/>
+  <Sidebar postsNames = {postsNames} postsUrls = {postsUrls} postsDates = { postsDates }/>
 </div>

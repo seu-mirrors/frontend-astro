@@ -1,8 +1,8 @@
 <script>
   import { Icon, Link, InformationCircle, Newspaper} from "svelte-hero-icons";
   import ExternalLink from "./ExternalLink.svelte";
-
-  export let postsNames, postsUrls;
+  import NewsExternalLink from "./NewsExternalLink.svelte";
+  export let postsNames, postsUrls, postsDates;
 </script>
 
 <aside class="flex flex-col divide-y">
@@ -16,7 +16,7 @@
       <div class="flex items-center">
         <ul>
           {#each postsNames as postName, i}
-            <ExternalLink href={postsUrls[i]} isArticle={true}>{postName}</ExternalLink>
+            <NewsExternalLink href={postsUrls[i]} date={postsDates[i]}>{postName}</NewsExternalLink>
           {/each}
         </ul>
       </div>
