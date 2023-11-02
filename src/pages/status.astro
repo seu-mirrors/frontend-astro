@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 
 import Header from "../components/Header.svelte";
-import Footer from "../components/Footer.svelte";
+import Footer from "../components/Footer.astro";
 
 import Status from "./Status.svelte";
 import "../app.css"
@@ -13,5 +13,5 @@ import "../app.css"
     <div class="caddy-wrapper flex flex-wrap bg-white text-neutral-900 gap-0 lg:divide-x max-lg:divide-y caddy-main grow">
         <Status client:only="svelte"/>
     </div>
-    <Footer client:only="svelte"/>
+    <Footer/>
 </Layout>
