@@ -15,11 +15,8 @@ dependencies:
     specifier: ^3.4.0
     version: registry.npmmirror.com/astro@3.4.0(typescript@5.2.2)
   autoprefixer:
-    specifier: ^10.4.15
+    specifier: ^10.4.16
     version: registry.npmmirror.com/autoprefixer@10.4.16(postcss@8.4.31)
-  postcss:
-    specifier: ^8.4.28
-    version: registry.npmmirror.com/postcss@8.4.31
   postcss-import:
     specifier: ^15.1.0
     version: registry.npmmirror.com/postcss-import@15.1.0(postcss@8.4.31)
