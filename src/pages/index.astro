@@ -18,8 +18,6 @@ allPosts.map(posts => {fiveNames.push(posts.frontmatter.title); fiveUrls.push(po
 
 <Layout title="东南大学开源镜像站 / SEU Mirrors">
 	<Header client:only="svelte"/>
-	<div class="caddy-wrapper flex flex-wrap bg-white text-neutral-900 gap-0 lg:divide-x max-lg:divide-y caddy-main grow">
-		<Home postsNames={fiveNames} postsUrls={fiveUrls} postsDates={fiveDates} client:only="svelte"/>
-	</div>
+	<Home postsNames={fiveNames} postsUrls={fiveUrls} postsDates={fiveDates} client:only="svelte"/>
 	<Footer/>
 </Layout>

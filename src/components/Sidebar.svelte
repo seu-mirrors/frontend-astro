@@ -16,7 +16,9 @@
       <div class="flex items-center">
         <ul>
           {#each postsNames as postName, i}
+          <li>
             <NewsExternalLink href={postsUrls[i]} date={postsDates[i]}>{postName}</NewsExternalLink>
+          </li>
           {/each}
         </ul>
       </div>
