@@ -2,18 +2,21 @@
 import {Icon, Newspaper} from "svelte-hero-icons";
 const { frontmatter } = Astro.props;
 
-import Header from "../components/Header.svelte";
+import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import '../app.css'
+
+import { ViewTransitions } from 'astro:transitions';
 ---
 <html lang="zh">
 <head>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <ViewTransitions />
     <title>{frontmatter.title} - 东南大学开源镜像站 / SEU Mirrors</title>
 </head>
 <body>
 <main class="flex flex-col min-h-screen">
-    <Header client:only="svelte"/>
+    <Header location = "posts"/>
 
     <div class="caddy-wrapper flex flex-wrap bg-white text-neutral-900 gap-0 lg:divide-x max-lg:divide-y caddy-main grow">
         <div class="px-4 py-3 flex flex-col w-full">

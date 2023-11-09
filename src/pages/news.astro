@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-import Header from "../components/Header.svelte";
+import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import NewsPage from "../components/NewsPage.astro"
 
@@ -14,7 +14,7 @@ import "../app.css"
 ---
 
 <Layout title="新闻通知 - 东南大学开源镜像站 / SEU Mirrors">
-    <Header client:only="svelte"/>
+    <Header location = "/news"/>
     <div class="caddy-wrapper flex flex-wrap bg-white text-neutral-900 gap-0 lg:divide-x max-lg:divide-y caddy-main grow">
         <div class="px-4 py-3 flex flex-col w-full">
             <p class="font-medium text-xl flex items-center">

@@ -1,7 +1,6 @@
-<script>
-  const location = window.location.pathname;
-  const SEULogo = "/favicon.svg";
-</script>
+---
+const { location } = Astro.props;
+---
 
 <header
   class="relative flex flex-wrap w-full items-center justify-between bg-white text-neutral-900 caddy-shadow px-caddy py-6 grow-0 shrink-0"
@@ -9,7 +8,7 @@
   <div class="caddy-wrapper">
     <div class="flex max-w-caddy flex-wrap items-center basis-full justify-between font-medium">
       <a class="flex items-center no-underline hover:no-underline" href="/">
-        <img class="mr-2 h-10 w-10 opacity-95" src={SEULogo} alt="SEU Logo" />
+        <img class="mr-2 h-10 w-10 opacity-95" src="/favicon.svg" alt="SEU Logo" />
         <span class="text-xl"
           >东南大学开源镜像站 <span class="text-neutral-400">/</span> SEU Mirrors<sup class="text-blue-600 ml-0.5">α</sup></span>
       </a>
@@ -18,6 +17,7 @@
         <a class="rounded-2xl" href="/">首页</a>
         <a class="rounded-2xl" href="/status">同步状态</a>
         <a class="rounded-2xl" href="/news">新闻通知</a>
+
       </div>
     </div>
 

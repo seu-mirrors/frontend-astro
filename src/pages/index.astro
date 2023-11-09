@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-import Header from "../components/Header.svelte";
+import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
 import Home from "./Home.svelte";
@@ -17,7 +17,7 @@ allPosts.map(posts => {fiveNames.push(posts.frontmatter.title); fiveUrls.push(po
 ---
 
 <Layout title="东南大学开源镜像站 / SEU Mirrors">
-	<Header client:only="svelte"/>
+	<Header location = "/"/>
 	<div class="caddy-wrapper flex flex-wrap bg-white text-neutral-900 gap-0 lg:divide-x max-lg:divide-y caddy-main grow">
 		<Home postsNames={fiveNames} postsUrls={fiveUrls} postsDates={fiveDates} client:only="svelte"/>
 	</div>
