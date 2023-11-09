@@ -1,9 +1,15 @@
-<script>
+---
   import { Icon, Link, InformationCircle, Newspaper} from "svelte-hero-icons";
-  import ExternalLink from "./ExternalLink.svelte";
-  import NewsExternalLink from "./NewsExternalLink.svelte";
-  export let postsNames, postsUrls, postsDates;
-</script>
+  import ExternalLink from "./ExternalLink.astro";
+  import NewsLink from "./NewsLink.astro";
+
+  let allPosts = await Astro.glob('../pages/news/p-*.md');
+  allPosts.reverse();
+  allPosts = allPosts.slice(0, 5);
+
+  let fiveNames = [], fiveUrls = [], fiveDates = [];
+  allPosts.map(posts => {fiveNames.push(posts.frontmatter.title); fiveUrls.push(posts.url); fiveDates.push(posts.frontmatter.pubDate)})
+---
 
 <aside class="flex flex-col divide-y">
   <div class="px-4 py-3 space-y-2">
@@ -15,9 +21,9 @@
     <section class="space-y-2">
       <div class="flex items-center">
         <ul>
-          {#each postsNames as postName, i}
-            <NewsExternalLink href={postsUrls[i]} date={postsDates[i]}>{postName}</NewsExternalLink>
-          {/each}
+          {fiveNames.map((postName, i) => (
+              <NewsLink href={fiveUrls[i]} date={fiveDates[i]}>{postName}</NewsLink>
+          ))}
         </ul>
       </div>
     </section>
