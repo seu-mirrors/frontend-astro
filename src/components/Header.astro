@@ -13,10 +13,10 @@ const { location } = Astro.props;
           >东南大学开源镜像站 <span class="text-neutral-400">/</span> SEU Mirrors<sup class="text-blue-600 ml-0.5">α</sup></span>
       </a>
 
-      <div class="space-x-4 header-nav max-sm:mt-6">
-        <a href="/">首页</a>
-        <a href="/status">同步状态</a>
-        <a href="/news">新闻通知</a>
+      <div class="space-x-4 header-nav max-sm:mt-6 nav-links">
+        <a class:list={["rounded-xl", { active: location === "/" }]} href="/">首页</a>
+        <a class:list={["rounded-xl", { active: location === "/status" }]} href="/status">同步状态</a>
+        <a class:list={["rounded-xl", { active: location === "/news" }]} href="/news">新闻通知</a>
 
       </div>
     </div>

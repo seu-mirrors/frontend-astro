@@ -39,7 +39,7 @@
   }
 
   .header-nav > a.active {
-    @apply border-slate-300 border-solid rounded-lg;
+    @apply border-slate-300 border-solid;
   }
 }
 
