@@ -8,9 +8,12 @@ import '../app.css'
 
 import { ViewTransitions } from 'astro:transitions';
 ---
-<html lang="zh">
+<html lang="ch">
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
     <ViewTransitions />
     <title>{frontmatter.title} - 东南大学开源镜像站 / SEU Mirrors</title>
 </head>
