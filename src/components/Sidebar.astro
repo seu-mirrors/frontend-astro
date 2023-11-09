@@ -21,9 +21,11 @@
     <section class="space-y-2">
       <div class="flex items-center">
         <ul>
-          {fiveNames.map((postName, i) => (
-              <NewsLink href={fiveUrls[i]} date={fiveDates[i]}>{postName}</NewsLink>
-          ))}
+          <li>
+            {fiveNames.map((postName, i) => (
+                <NewsLink href={fiveUrls[i]} date={fiveDates[i]}>{postName}</NewsLink>
+            ))}
+          </li>
         </ul>
       </div>
     </section>
