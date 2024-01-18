@@ -1,31 +1,29 @@
 ---
-  import { Icon, Link, InformationCircle, Newspaper} from "svelte-hero-icons";
-  import ExternalLink from "./ExternalLink.astro";
-  import NewsLink from "./NewsLink.astro";
+import { Icon, Link, InformationCircle, Newspaper } from "svelte-hero-icons";
+import ExternalLink from "./ExternalLink.astro";
+import NewsLink from "./NewsLink.astro";
+import { getCollection } from "astro:content";
 
-  let allPosts = await Astro.glob('../pages/news/p-*.md');
-  allPosts.reverse();
-  allPosts = allPosts.slice(0, 5);
-
-  let fiveNames = [], fiveUrls = [], fiveDates = [];
-  allPosts.map(posts => {fiveNames.push(posts.frontmatter.title); fiveUrls.push(posts.url); fiveDates.push(posts.frontmatter.pubDate)})
+const news = (await getCollection("news"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 5);
 ---
 
 <aside class="flex flex-col divide-y">
   <div class="px-4 py-3 space-y-2">
     <p class="font-medium text-xl flex items-center">
       <Icon class="w-6 h-6 mr-2" src={Newspaper} />
-      新闻通知
+      近期更新
     </p>
 
     <section class="space-y-2">
       <div class="flex items-center">
         <ul>
-          <li>
-            {fiveNames.map((postName, i) => (
-                <NewsLink href={fiveUrls[i]} date={fiveDates[i]}>{postName}</NewsLink>
-            ))}
-          </li>
+          {
+            news.map((news) => {
+                return <li><NewsLink news={news} /></li>;
+            })
+          }
         </ul>
       </div>
     </section>
@@ -39,7 +37,9 @@
 
     <section class="space-y-2">
       <div class="flex items-center">
-        <p>东南大学镜像站目前正处于试运行阶段，对于使用中所遇到的任何问题和需求，还请不吝提出。</p>
+        <p>
+          东南大学镜像站目前正处于试运行阶段，对于使用中所遇到的任何问题和需求，还请不吝提出。
+        </p>
       </div>
     </section>
   </div>

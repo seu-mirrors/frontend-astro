@@ -1,0 +1,49 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+
+import { getCollection } from "astro:content";
+export async function getStaticPaths() {
+  const newsEntries = await getCollection("news");
+  return newsEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+import { Icon, Newspaper, Calendar, User } from "svelte-hero-icons";
+---
+
+<Layout title={entry.data.title}>
+  <Header />
+  <div
+    class="caddy-wrapper flex flex-wrap bg-white text-neutral-900 gap-0 lg:divide-x max-lg:divide-y caddy-main grow">
+    <div class="px-4 py-3 flex flex-col w-full">
+      <p class="font-medium text-xl flex items-center">
+        <Icon class="w-6 h-6 mr-2" src={Newspaper} solid />
+        新闻公告
+      </p>
+      <div class="py-6">
+        <h2 class="text-3xl">
+          {entry.data.title}
+        </h2>
+        <span class="text-gray-700 text-md inline-flex items-center mt-1">
+          <Icon class="w-4 h-4 mr-1" src={User} solid />
+          {entry.data.author}
+          <span class="mx-1">·</span>
+          <Icon class="w-4 h-4 mr-1" src={Calendar} solid />
+          {entry.data.pubDate.toISOString().slice(0, 10).replaceAll("-", "/")}
+        </span>
+        <article class="mt-6 prose">
+          <Content />
+        </article>
+      </div>
+    </div>
+  </div>
+  <Footer />
+</Layout>

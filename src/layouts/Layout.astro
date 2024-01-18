@@ -1,28 +1,28 @@
 ---
 interface Props {
-	title: string;
+  title: string;
 }
 
 const { title } = Astro.props;
-import "../app.css"
+const renderTitle = title === '' ? '东南大学开源镜像站 / SEU Mirrors' : `${title} - 东南大学开源镜像站 / SEU Mirrors`;
+import "../app.css";
 
-import { ViewTransitions } from 'astro:transitions';
-
+import { ViewTransitions } from "astro:transitions";
 ---
 
 <!doctype html>
-<html lang="zh">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<ViewTransitions />
-		<title>{title}</title>
-	</head>
-	<body>
-		<main class="flex flex-col min-h-screen">
-			<slot />
-		</main>
-	</body>
+<html lang="zh" transition:animate="none">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <ViewTransitions />
+    <title>{renderTitle}</title>
+  </head>
+  <body>
+    <main class="flex flex-col min-h-screen">
+      <slot />
+    </main>
+  </body>
 </html>

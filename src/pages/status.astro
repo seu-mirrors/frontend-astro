@@ -1,17 +1,18 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
-import Status from "../components/Status.svelte";
-import "../app.css"
+import MirrorStatus from "../components/MirrorStatus.svelte";
+import "../app.css";
 ---
 
-<Layout title="同步状态 - 东南大学开源镜像站 / SEU Mirrors">
-    <Header location = "/status"/>
-    <div class="caddy-wrapper flex flex-wrap bg-white text-neutral-900 gap-0 lg:divide-x max-lg:divide-y caddy-main grow">
-        <Status client:only="svelte"/>
-    </div>
-    <Footer/>
+<Layout title="同步状态">
+  <Header />
+  <div
+    class="caddy-wrapper flex flex-wrap bg-white text-neutral-900 gap-0 lg:divide-x max-lg:divide-y caddy-main grow">
+    <MirrorStatus client:only="svelte" />
+  </div>
+  <Footer />
 </Layout>
