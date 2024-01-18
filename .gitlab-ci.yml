@@ -1,0 +1,23 @@
+stages:
+  - build
+
+build:
+  stage: build
+  image: node:20
+  before_script:
+    - npm config set registry https://registry.npmmirror.com
+    - corepack enable
+    - corepack prepare pnpm@latest --activate
+    - pnpm config set store-dir .pnpm-store
+  script:
+    - pnpm install # install dependencies
+    - pnpm build # build the project
+  cache:
+    key:
+      files:
+        - pnpm-lock.yaml
+    paths:
+      - .pnpm-store
+  artifacts:
+    paths:
+      - dist/
