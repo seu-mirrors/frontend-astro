@@ -12,6 +12,9 @@ export default {
         "caddy": "5%",
       },
     },
+    letterSpacing: {
+      wide: ".015em",
+    },
   },
   content: ["./src/**/*.{svelte,js,ts,astro}"], //for unused css
   variants: {

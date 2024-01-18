@@ -39,7 +39,7 @@ import { Icon, Newspaper, Calendar, User } from "svelte-hero-icons";
           <Icon class="w-4 h-4 mr-1" src={Calendar} solid />
           {entry.data.pubDate.toISOString().slice(0, 10).replaceAll("-", "/")}
         </span>
-        <article class="mt-6 prose">
+        <article class="mt-6 prose break-words hyphens-auto tracking-wide max-w-none">
           <Content />
         </article>
       </div>
