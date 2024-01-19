@@ -9,5 +9,7 @@ export default defineConfig({
     assets: '-'
   },
   output: 'server',
-  adapter: deno(), 
+  adapter: deno({
+    start: false,
+  }), 
 });
