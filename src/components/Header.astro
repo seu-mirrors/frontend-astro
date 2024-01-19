@@ -29,7 +29,7 @@ const location = Astro.url.pathname;
         href={ location === "/news" ? null : "/news"}>新闻公告</a
       >
         <a
-          class:list={["rounded-xl", { active: location === "/status" }]}
+          class:list={["rounded-xl", { active: location.startsWith("/status") }]}
           href={ location === "/status" ? null : "/status" }>同步状态</a
         >
       </div>

@@ -1,0 +1,43 @@
+/*
+ * Ref: https://css-tricks.com/responsive-data-tables/
+ */
+
+/* tailwind css lg: 960px */
+@media only screen and not (min-width: 800px) {
+  /* Force table to not be like tables anymore */
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+  }
+
+  /* Hide table headers (but not display: none;, for accessibility) */
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  td {
+    /* Behave like a "row" */
+    border: none;
+    position: relative;
+    padding-left: 40%;
+  }
+
+  td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 2px;
+    left: 4px;
+    width: 30%;
+    padding-right: 10px;
+    white-space: nowrap;
+    /* Retrive content from html data-label */
+    content: attr(data-label);
+  }
+}
