@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "compile": "deno compile --allow-net --allow-read --allow-env ./dist/server/entry.mjs && mv -v ./entry ./dist/frontend-astro",
+    "compile": "deno compile --allow-net --allow-read --allow-env ./src/server/main.js --is_compiled_binary && mv -v ./server ./dist/frontend-astro",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
