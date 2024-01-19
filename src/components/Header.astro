@@ -21,16 +21,16 @@ const location = Astro.url.pathname;
       </a>
 
       <div class="space-x-4 header-nav max-sm:mt-6">
-        <a class:list={["rounded-xl", { active: location === "/" }]} href="/"
+        <a class:list={["rounded-xl", { active: location === "/" }]} href= { location === "/" ? null : '/' }
           >首页</a
         >
         <a
         class:list={["rounded-xl", { active: location.startsWith("/news") }]}
-        href="/news">新闻公告</a
+        href={ location === "/news" ? null : "/news"}>新闻公告</a
       >
         <a
           class:list={["rounded-xl", { active: location === "/status" }]}
-          href="/status">同步状态</a
+          href={ location === "/status" ? null : "/status" }>同步状态</a
         >
       </div>
     </div>

@@ -1,0 +1,85 @@
+<script is:inline>
+  //import { Icon, ArchiveBox } from "svelte-hero-icons";
+
+  function fetchData(url) {
+    return fetch(url)
+      .then(response => response.json())
+      .catch(error => console.error('Error fetching data:', error));
+  }
+
+  function renderData(data) {
+    const listContainer = document.getElementsByClassName("tbody");
+    const dataList = data;
+
+    listContainer[0].innerHTML = '';
+
+    dataList.forEach(item => {
+      document.getElementById('waiting').classList.add('hidden');
+      const listItem = document.createElement('tr');
+      listItem.classList.add('hover:bg-[#f4f6f7]');
+      listItem.innerHTML = `<td class="filename"><a href="/${item.name}">${item.name}</a></td>
+        <td class="filetime tabular-nums">${item.last_update}</td>`
+      listContainer[0].appendChild(listItem);
+    });
+    document.getElementById("table").classList.remove("hidden");
+  }
+
+  function startRender() {
+    const apiUrl = 'https://mirrors.seu.edu.cn/-/api/tunasync.json';
+    fetchData(apiUrl)
+      .then(data => renderData(data))
+      .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('waiting').classList.add('hidden');
+        document.getElementById('error').classList.remove('hidden');
+      });
+  }
+
+  document.addEventListener('astro:page-load', startRender);
+  
+  document.addEventListener('astro:before-preparation', () => {
+    document.removeEventListener('astro:page-load', startRender)
+  });
+  
+</script>
+
+<div class="px-4 py-3 flex flex-col">
+  <p class="font-medium text-xl flex items-center">
+    <!--Icon class="w-6 h-6 mr-2" src={ArchiveBox} solid /-->
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" class="w-6 h-6 mr-2"><path d="M3.375 3C2.339 3 1.5 3.84 1.5 4.875v.75c0 1.036.84 1.875 1.875 1.875h17.25c1.035 0 1.875-.84 1.875-1.875v-.75C22.5 3.839 21.66 3 20.625 3H3.375z"></path><path fill-rule="evenodd" d="M3.087 9l.54 9.176A3 3 0 006.62 21h10.757a3 3 0 002.995-2.824L20.913 9H3.087zm6.163 3.75A.75.75 0 0110 12h4a.75.75 0 010 1.5h-4a.75.75 0 01-.75-.75z" clip-rule="evenodd"></path></svg>
+    镜像列表
+  </p>
+
+    <p id="waiting">...waiting</p>
+
+    <table class="mt-3 table-fixed w-full text-left hidden" id="table">
+        <colgroup>
+        <col class="w-1/2" />
+        <col class="w-1/2" />
+        </colgroup>
+
+        <thead>
+            <tr class="row">
+                <th>Name</th>
+                <th>Last Update</th>
+            </tr>
+        </thead>
+
+        <tbody class="tbody">
+            <!--{#each data as mirror}
+                <tr class="hover:bg-[#f4f6f7]">
+                    <td class="filename"><a href="/{mirror.name}">{mirror.name}</a></td>
+                    <td class="filetime tabular-nums">{mirror.last_update}</td>
+                </tr>
+            {/each}-->
+        </tbody>
+    </table>
+
+	  <p class="hidden" id="error">An error occurred!</p>
+</div>
+
+<style>
+  .hidden {
+    display: none;
+  }
+</style>
