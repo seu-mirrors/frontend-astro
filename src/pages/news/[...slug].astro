@@ -17,6 +17,8 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 
 import { Icon, Newspaper, Calendar, User } from "svelte-hero-icons";
+
+export const prerender = true;
 ---
 
 <Layout title={entry.data.title}>

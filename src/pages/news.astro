@@ -13,6 +13,8 @@ const news = (await getCollection("news"))
   .slice(0, 5);
 
 import "../app.css";
+
+export const prerender = true;
 ---
 
 <Layout title="新闻公告">

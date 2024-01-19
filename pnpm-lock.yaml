@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@astrojs/deno':
+    specifier: ^5.0.1
+    version: 5.0.1(astro@4.2.0)
   '@astrojs/svelte':
     specifier: ^5.0.3
     version: 5.0.3(astro@4.2.0)(svelte@4.2.9)(typescript@5.3.3)(vite@5.0.11)
@@ -56,6 +59,15 @@ packages:
 
   /@astrojs/compiler@2.4.2:
     resolution: {integrity: sha512-aPdo8rtdN1eBmyERfP5TnYZOnImLYZ8VPHl0eKhFaWIcEIRYhT5NHSohCwtiKcv1M+BprZWRQymojJ3uuk+x7Q==}
+    dev: false
+
+  /@astrojs/deno@5.0.1(astro@4.2.0):
+    resolution: {integrity: sha512-nYztGqHqC+q3A9ynjj3gblAkO/ZylDwahjVTx+2DvZgX4U+BJU/gL5BZkNtL+P10opCKJi29NvvVFvk6jwZHmA==}
+    peerDependencies:
+      astro: ^3.1.4
+    dependencies:
+      astro: 4.2.0(typescript@5.3.3)
+      esbuild: 0.19.11
     dev: false
 
   /@astrojs/internal-helpers@0.2.1:
