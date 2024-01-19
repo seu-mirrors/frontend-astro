@@ -29,7 +29,7 @@ import "../app.css";
         {
           news.map((item) => (
             <div class="py-2">
-              <h3 class="text-xl"><a href={`/news/${item.slug}/`}>{item.data.title}</a></h3>
+              <h3 class="text-xl"><a href={`/news/${item.slug}`}>{item.data.title}</a></h3>
               <span class="text-gray-700 text-sm inline-flex items-center mt-1">
                 <Icon class="w-4 h-4 mr-1" src={User} solid />
                 {item.data.author}
