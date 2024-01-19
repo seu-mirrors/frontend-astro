@@ -4,11 +4,11 @@
  * port = 8085
  * root_dir = "/xxx"
  */
-import { serve } from "https://deno.land/std/http/server.ts";
-import { serveDir } from "https://deno.land/std/http/file_server.ts";
+import { serve } from "http/server.ts";
+import { serveDir } from "http/file_server.ts";
 import { handle } from "./../../dist/server/entry.mjs";
-import { dirname, fromFileUrl, SEP } from "https://deno.land/std/path/mod.ts";
-import { parse } from "https://deno.land/std/toml/mod.ts";
+import { dirname, fromFileUrl, SEP } from "path/mod.ts";
+import { parse } from "toml/mod.ts";
 
 const PROG_PATH = Deno.args.includes("--is_compiled_binary")
   ? Deno.execPath()

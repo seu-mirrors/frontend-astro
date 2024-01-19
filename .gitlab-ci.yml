@@ -31,8 +31,7 @@ compile:
     name: denoland/deno:alpine
     entrypoint: [""]
   script:
-    - deno compile --allow-net --allow-read --allow-env ./dist/server/entry.mjs
-    - mv -v ./entry ./frontend-astro
+    - deno task compile
   artifacts:
     paths:
-    - frontend-astro
+    - dist/

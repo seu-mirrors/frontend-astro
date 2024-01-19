@@ -1,0 +1,13 @@
+{
+  "imports": {
+    "http/": "https://deno.land/std/http/",
+    "flags/": "https://deno.land/std/flags/",
+    "path/": "https://deno.land/std/path/",
+    "toml/": "https://deno.land/std/toml/",
+    "./": "./"
+  }
+  "tasks": {
+    "start": "deno run --allow-net --allow-read --allow-env ./src/server/main.js"
+    "compile": "deno compile --allow-net --allow-read --allow-env ./src/server/main.js --is_compiled_binary && mv ./server ./dist/frontend-astro"
+  }
+}
