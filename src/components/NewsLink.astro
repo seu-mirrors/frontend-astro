@@ -2,7 +2,7 @@
 const { news } = Astro.props;
 ---
 
-<a href={`/news/${news.slug}/`} class="inline-flex items-center">
+<a href={`/news/${news.slug}`} class="inline-flex items-center">
   {news.data.title}
 </a>
 
