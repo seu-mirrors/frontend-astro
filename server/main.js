@@ -6,7 +6,7 @@
  */
 import { serve } from "http/server.ts";
 import { serveDir } from "http/file_server.ts";
-import { handle } from "./../../dist/server/entry.mjs";
+import { handle } from "./../dist/server/entry.mjs";
 import { dirname, fromFileUrl, normalize, SEP } from "path/mod.ts";
 import { parse } from "toml/mod.ts";
 
@@ -15,7 +15,7 @@ const PROG_PATH = Deno.args.includes("--is_compiled_binary")
   : fromFileUrl(Deno.mainModule);
 const DEFAULT_ROOT_DIR = Deno.args.includes("--is_compiled_binary")
   ? `${dirname(PROG_PATH)}${SEP}client`
-  : `${dirname(dirname(dirname(PROG_PATH)))}${SEP}dist${SEP}client`;
+  : `${dirname(dirname(PROG_PATH))}${SEP}dist${SEP}client`;
 const CONFIG_FILE = `${dirname(PROG_PATH)}${SEP}config.toml`;
 
 function exitWithError(errstr) {

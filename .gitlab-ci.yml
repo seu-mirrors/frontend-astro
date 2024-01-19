@@ -31,7 +31,7 @@ compile:
     name: denoland/deno:alpine
     entrypoint: [""]
   script:
-    - deno task compile
+    - cd server && deno task compile
   artifacts:
     paths:
     - dist/
