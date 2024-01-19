@@ -7,7 +7,7 @@
 import { serve } from "http/server.ts";
 import { serveDir } from "http/file_server.ts";
 import { handle } from "./../../dist/server/entry.mjs";
-import { dirname, fromFileUrl, SEP } from "path/mod.ts";
+import { dirname, fromFileUrl, normalize, SEP } from "path/mod.ts";
 import { parse } from "toml/mod.ts";
 
 const PROG_PATH = Deno.args.includes("--is_compiled_binary")
@@ -43,7 +43,7 @@ let conf;
   const root_dir =
     isUndefined(conf) || isUndefined(conf.root_dir)
       ? DEFAULT_ROOT_DIR
-      : conf.root_dir;
+      : normalize(`${dirname(PROG_PATH)}/${conf.root_dir}`);
   const port = isUndefined(conf) || isUndefined(conf.port) ? 8085 : conf.port;
 
   console.log("Using root dir " + root_dir);
