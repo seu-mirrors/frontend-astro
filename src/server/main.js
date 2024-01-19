@@ -40,8 +40,11 @@ let conf;
     }
   }
 
-  let root_dir = isUndefined(conf.root_dir) ? DEFAULT_ROOT_DIR : conf.root_dir;
-  let port = isUndefined(conf.port) ? 8085 : conf.port;
+  const root_dir =
+    isUndefined(conf) || isUndefined(conf.root_dir)
+      ? DEFAULT_ROOT_DIR
+      : conf.root_dir;
+  const port = isUndefined(conf) || isUndefined(conf.port) ? 8085 : conf.port;
 
   console.log("Using root dir " + root_dir);
 
