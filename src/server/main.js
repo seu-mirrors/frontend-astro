@@ -33,12 +33,10 @@ let conf;
   try {
     conf = parse(await Deno.readTextFile(CONFIG_FILE));
   } catch (err) {
-    if (err instanceof TOMLParseError) {
-      exitWithError("Parse toml failed!");
-    } else if (err instanceof Deno.errors.NotFound) {
+    if (err instanceof Deno.errors.NotFound) {
       console.warn(`[WARN] ${CONFIG_FILE} not found!`);
     } else {
-      console.log(err);
+      exitWithError("Parse toml failed!");
     }
   }
 
