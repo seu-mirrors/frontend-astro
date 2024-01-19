@@ -32,6 +32,7 @@ compile:
     entrypoint: [""]
   script:
     - cd server && deno task compile
+    - rm -rfv ../dist/server
   artifacts:
     paths:
     - dist/
