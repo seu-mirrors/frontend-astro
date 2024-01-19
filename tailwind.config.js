@@ -11,6 +11,9 @@ export default {
       padding: {
         "caddy": "5%",
       },
+      screens: {
+        "lg": "800px",
+      }
     },
     letterSpacing: {
       wide: ".015em",
