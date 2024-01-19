@@ -6,7 +6,9 @@ import Footer from "../components/Footer.astro";
 
 import { getCollection } from "astro:content";
 
-import { Icon, Newspaper, Calendar, User } from "svelte-hero-icons";
+import Newspaper from "astro-heroicons/solid/Newspaper.astro";
+import Calendar from "astro-heroicons/solid/Calendar.astro";
+import User from "astro-heroicons/solid/User.astro";
 
 const news = (await getCollection("news"))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
@@ -23,7 +25,7 @@ export const prerender = true;
     class="caddy-wrapper flex flex-wrap bg-white text-neutral-900 gap-0 lg:divide-x max-lg:divide-y caddy-main grow">
     <div class="px-4 py-3 flex flex-col w-full">
       <p class="font-medium text-xl flex items-center">
-        <Icon class="w-6 h-6 mr-2" src={Newspaper} solid />
+        <Newspaper class="w-6 h-6 mr-2" />
         新闻公告
       </p>
 
@@ -33,10 +35,10 @@ export const prerender = true;
             <div class="py-2">
               <h3 class="text-xl"><a href={`/news/${item.slug}`}>{item.data.title}</a></h3>
               <span class="text-gray-700 text-sm inline-flex items-center mt-1">
-                <Icon class="w-4 h-4 mr-1" src={User} solid />
+                <User class="w-4 h-4 mr-1" />
                 {item.data.author}
                 <span class="mx-1">·</span>
-                <Icon class="w-4 h-4 mr-1" src={Calendar} solid />
+                <Calendar class="w-4 h-4 mr-1" />
                 {item.data.pubDate.toISOString().slice(0, 10).replaceAll('-', '/')}
               </span>
             </div>

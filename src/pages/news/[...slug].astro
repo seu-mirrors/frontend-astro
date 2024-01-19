@@ -16,7 +16,9 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 
-import { Icon, Newspaper, Calendar, User } from "svelte-hero-icons";
+import Newspaper from "astro-heroicons/solid/Newspaper.astro";
+import Calendar from "astro-heroicons/solid/Calendar.astro";
+import User from "astro-heroicons/solid/User.astro";
 
 export const prerender = true;
 ---
@@ -27,7 +29,7 @@ export const prerender = true;
     class="caddy-wrapper flex flex-wrap bg-white text-neutral-900 gap-0 lg:divide-x max-lg:divide-y caddy-main grow">
     <div class="px-4 py-3 flex flex-col w-full">
       <p class="font-medium text-xl flex items-center">
-        <Icon class="w-6 h-6 mr-2" src={Newspaper} solid />
+        <Newspaper class="w-6 h-6 mr-2" />
         新闻公告
       </p>
       <div class="py-6">
@@ -35,10 +37,10 @@ export const prerender = true;
           {entry.data.title}
         </h2>
         <span class="text-gray-700 text-md inline-flex items-center mt-1">
-          <Icon class="w-4 h-4 mr-1" src={User} solid />
+          <User class="w-4 h-4 mr-1" />
           {entry.data.author}
           <span class="mx-1">·</span>
-          <Icon class="w-4 h-4 mr-1" src={Calendar} solid />
+          <Calendar class="w-4 h-4 mr-1" />
           {entry.data.pubDate.toISOString().slice(0, 10).replaceAll("-", "/")}
         </span>
         <article class="mt-6 prose break-words hyphens-auto tracking-wide max-w-none">

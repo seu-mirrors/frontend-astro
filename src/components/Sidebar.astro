@@ -1,5 +1,7 @@
 ---
-import { Icon, Link, InformationCircle, Newspaper } from "svelte-hero-icons";
+import Link from "astro-heroicons/solid/Link.astro"
+import InformationCircle from "astro-heroicons/solid/InformationCircle.astro"
+import Newspaper from "astro-heroicons/solid/Newspaper.astro"
 import ExternalLink from "./ExternalLink.astro";
 import NewsLink from "./NewsLink.astro";
 import { getCollection } from "astro:content";
@@ -12,7 +14,7 @@ const news = (await getCollection("news"))
 <aside class="flex flex-col divide-y">
   <div class="px-4 py-3 space-y-2">
     <p class="font-medium text-xl flex items-center">
-      <Icon class="w-6 h-6 mr-2" src={Newspaper} />
+      <Newspaper class="w-6 h-6 mr-2" />
       近期更新
     </p>
 
@@ -31,7 +33,7 @@ const news = (await getCollection("news"))
 
   <div class="px-4 py-3 space-y-2">
     <p class="font-medium text-xl flex items-center">
-      <Icon class="w-6 h-6 mr-2" src={InformationCircle} />
+      <InformationCircle class="w-6 h-6 mr-2" />
       试运行
     </p>
 
@@ -46,7 +48,7 @@ const news = (await getCollection("news"))
 
   <div class="px-4 py-3 space-y-2">
     <p class="font-medium text-xl flex items-center">
-      <Icon class="w-6 h-6 mr-2" src={Link} />
+      <Link class="w-6 h-6 mr-2" />
       相关链接
     </p>
 

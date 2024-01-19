@@ -1,5 +1,5 @@
 ---
-import { Icon, ArchiveBox } from "svelte-hero-icons";
+import ArchiveBox from "astro-heroicons/solid/ArchiveBox.astro"
 import EleventyFetch from "@11ty/eleventy-fetch";
 
 let mirrorStatus, fetchError = false, errMsg;
@@ -23,7 +23,7 @@ try {
 
 <div class="px-4 py-3 flex flex-col">
   <p class="font-medium text-xl flex items-center">
-    <Icon class="w-6 h-6 mr-2" src={ArchiveBox} solid />
+    <ArchiveBox class="w-6 h-6 mr-2" />
     镜像列表
   </p>
 

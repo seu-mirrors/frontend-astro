@@ -1,5 +1,5 @@
 ---
-import { ArrowPath, Icon } from "svelte-hero-icons";
+import ArrowPath from "astro-heroicons/solid/ArrowPath.astro"
 import "../styles/status.css";
 
 let mirrorStatus, fetchError = false, errMsg;
@@ -21,7 +21,7 @@ try {
 
 <div class="px-4 py-3 flex flex-col w-full">
   <p class="font-medium text-xl flex items-center">
-    <Icon class="w-6 h-6 mr-2" src={ArrowPath} solid />
+    <ArrowPath class="w-6 h-6 mr-2" />
     同步状态
   </p>
 
