@@ -45,8 +45,10 @@ let conf;
       ? DEFAULT_ROOT_DIR
       : normalize(`${dirname(PROG_PATH)}/${conf.root_dir}`);
   const port = isUndefined(conf) || isUndefined(conf.port) ? 8085 : conf.port;
+  const prod = isUndefined(conf) || isUndefined(conf.prod) ? false : conf.prod;
 
   console.log("Using root dir " + root_dir);
+  console.log("Production flag: " + (prod ? "true" : "false"));
 
   serve(
     (req) => {
@@ -55,7 +57,11 @@ let conf;
         return handle(req);
       }
 
-      return serveDir(req, {
+      const httpsReq = prod
+        ? new Request(req.url.replace(/^http:/, "https:"))
+        : req;
+
+      return serveDir(httpsReq, {
         fsRoot: root_dir,
       });
     },
