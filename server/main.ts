@@ -6,7 +6,8 @@
  */
 
 import { serve } from "http/server.ts";
-import { serveDir } from "http/file_server.ts";
+import { serveDir, serveFile } from "http/file_server.ts";
+import { STATUS_CODE } from "http/status.ts";
 import { handle } from "./../dist/server/entry.mjs";
 import { dirname, fromFileUrl, normalize, SEP } from "path/mod.ts";
 import { parse } from "toml/mod.ts";
@@ -64,6 +65,12 @@ function exitWithError(errstr: string) {
 
       return serveDir(httpsReq, {
         fsRoot: conf.root_dir,
+      }).then((r: Response) => {
+        if (r.status == STATUS_CODE.NotFound) {
+          return serveFile(httpsReq, `${conf.root_dir}${SEP}404.html`);
+        } else {
+          return r;
+        }
       });
     },
     { port: conf.port },

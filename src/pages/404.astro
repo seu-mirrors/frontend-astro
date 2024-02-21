@@ -1,0 +1,41 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ExternalLink from "../components/ExternalLink.astro";
+
+import "../styles/app.css";
+
+export const prerender = true;
+---
+
+<Layout title="404 Not Found">
+  <Header />
+  <div
+    class="caddy-wrapper flex flex-wrap bg-white text-neutral-900 gap-0 lg:divide-x max-lg:divide-y caddy-main grow items-center">
+    <div class="px-4 py-3 flex flex-col w-full">
+      <div class="py-6 mt-6 prose break-words hyphens-auto tracking-wide max-w-none mx-32">
+        <h2 class="text-center">
+          404 Not Found
+        </h2>
+        <p class="text-xl text-center">
+          未能找到您请求的页面。 <br> 如您发现同步出现问题，或者正在寻找暂未包含的镜像，请前往
+            <ExternalLink
+              href="https://github.com/seu-mirrors/issues/issues/new">
+              镜像站 GitHub
+            </ExternalLink>
+
+            或
+
+            <ExternalLink
+              href="https://gitlab.seu.edu.cn/mirrors/issues/-/issues/new">
+              校内 GitLab
+            </ExternalLink>
+          发送相关报告。
+        </p>
+      </div>
+    </div>
+  </div>
+  <Footer />
+</Layout>
