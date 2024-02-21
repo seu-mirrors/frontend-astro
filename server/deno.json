@@ -7,7 +7,7 @@
     "./": "./"
   },
   "tasks": {
-    "start": "deno run --allow-net --allow-read --allow-env ./main.js",
-    "compile": "deno compile --allow-net --allow-read --allow-env ./main.js --is_compiled_binary && mv ./server ./../dist/frontend-astro"
+    "start": "deno run --allow-net --allow-read --allow-env ./main.ts",
+    "compile": "deno compile --allow-net --allow-read --allow-env ./main.ts --is_compiled_binary && mv ./server ./../dist/frontend-astro"
   }
 }

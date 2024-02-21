@@ -4,8 +4,10 @@
  * port = 8085
  * root_dir = "/xxx"
  */
+
 import { serve } from "http/server.ts";
-import { serveDir } from "http/file_server.ts";
+import { serveDir, serveFile } from "http/file_server.ts";
+import { STATUS_CODE } from "http/status.ts";
 import { handle } from "./../dist/server/entry.mjs";
 import { dirname, fromFileUrl, normalize, SEP } from "path/mod.ts";
 import { parse } from "toml/mod.ts";
@@ -18,20 +20,27 @@ const DEFAULT_ROOT_DIR = Deno.args.includes("--is_compiled_binary")
   : `${dirname(dirname(PROG_PATH))}${SEP}dist${SEP}client`;
 const CONFIG_FILE = `${dirname(PROG_PATH)}${SEP}config.toml`;
 
-function exitWithError(errstr) {
+interface Conf {
+  root_dir: string;
+  port: number;
+  prod: boolean;
+}
+
+let conf: Conf = {
+  root_dir: DEFAULT_ROOT_DIR,
+  port: 8085,
+  prod: false,
+};
+
+function exitWithError(errstr: string) {
   console.error(errstr);
   Deno.exit(1);
 }
 
-function isUndefined(a) {
-  return typeof a === "undefined";
-}
-
-let conf;
-
 (async () => {
   try {
-    conf = parse(await Deno.readTextFile(CONFIG_FILE));
+    conf = parse(await Deno.readTextFile(CONFIG_FILE)) as unknown as Conf;
+    conf.root_dir = normalize(`${dirname(PROG_PATH)}/${conf.root_dir}`);
   } catch (err) {
     if (err instanceof Deno.errors.NotFound) {
       console.warn(`[WARN] ${CONFIG_FILE} not found!`);
@@ -40,31 +49,30 @@ let conf;
     }
   }
 
-  const root_dir =
-    isUndefined(conf) || isUndefined(conf.root_dir)
-      ? DEFAULT_ROOT_DIR
-      : normalize(`${dirname(PROG_PATH)}/${conf.root_dir}`);
-  const port = isUndefined(conf) || isUndefined(conf.port) ? 8085 : conf.port;
-  const prod = isUndefined(conf) || isUndefined(conf.prod) ? false : conf.prod;
-
-  console.log("Using root dir " + root_dir);
-  console.log("Production flag: " + (prod ? "true" : "false"));
+  console.log("Using root dir " + conf.root_dir);
+  console.log("Production flag: " + (conf.prod ? "true" : "false"));
 
   serve(
-    (req) => {
+    (req: Request) => {
       const pathname = new URL(req.url).pathname;
       if (pathname === "/" || pathname.startsWith("/status")) {
         return handle(req);
       }
 
-      const httpsReq = prod
+      const httpsReq = conf.prod
         ? new Request(req.url.replace(/^http:/, "https:"))
         : req;
 
       return serveDir(httpsReq, {
-        fsRoot: root_dir,
+        fsRoot: conf.root_dir,
+      }).then((r: Response) => {
+        if (r.status == STATUS_CODE.NotFound) {
+          return serveFile(httpsReq, `${conf.root_dir}${SEP}404.html`);
+        } else {
+          return r;
+        }
       });
     },
-    { port: port },
+    { port: conf.port },
   );
 })();

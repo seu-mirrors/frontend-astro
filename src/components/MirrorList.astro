@@ -1,9 +1,7 @@
 ---
 import ArchiveBox from "astro-heroicons/solid/ArchiveBox.astro"
-import EleventyFetch from "@11ty/eleventy-fetch";
 
 let mirrorStatus, fetchError = false, errMsg;
-
 
 try {
   mirrorStatus = await (async () => {

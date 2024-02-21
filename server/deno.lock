@@ -3,6 +3,7 @@
   "redirects": {
     "https://deno.land/std/http/file_server.ts": "https://deno.land/std@0.212.0/http/file_server.ts",
     "https://deno.land/std/http/server.ts": "https://deno.land/std@0.212.0/http/server.ts",
+    "https://deno.land/std/http/status.ts": "https://deno.land/std@0.216.0/http/status.ts",
     "https://deno.land/std/path/mod.ts": "https://deno.land/std@0.212.0/path/mod.ts",
     "https://deno.land/std/toml/mod.ts": "https://deno.land/std@0.212.0/toml/mod.ts"
   },
@@ -165,6 +166,7 @@
     "https://deno.land/std@0.212.0/toml/mod.ts": "d043f41bb35b9bf7de5938123e5d28b2f032718111a4ef9878049ef9339e8dcb",
     "https://deno.land/std@0.212.0/toml/parse.ts": "2f0729a8f62c7e508af8dfada0386a4bc2c0d664ef4d26090df03cf495dcb25a",
     "https://deno.land/std@0.212.0/toml/stringify.ts": "eb94311df89e9305017647bb3f4f659dd41879cfc0a5016ff0ae1ad0ce23e54a",
-    "https://deno.land/std@0.212.0/version.ts": "3159753900a3af68e43a3b21a1995cbc8d28fe85a4e5fbc5736bf21ae84ac8fa"
+    "https://deno.land/std@0.212.0/version.ts": "3159753900a3af68e43a3b21a1995cbc8d28fe85a4e5fbc5736bf21ae84ac8fa",
+    "https://deno.land/std@0.216.0/http/status.ts": "ed61b4882af2514a81aefd3245e8df4c47b9a8e54929a903577643d2d1ebf514"
   }
 }
