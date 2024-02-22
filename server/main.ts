@@ -67,7 +67,13 @@ function exitWithError(errstr: string) {
         fsRoot: conf.root_dir,
       }).then((r: Response) => {
         if (r.status == STATUS_CODE.NotFound) {
-          return serveFile(httpsReq, `${conf.root_dir}${SEP}404.html`);
+          return serveFile(httpsReq, `${conf.root_dir}${SEP}404.html`).then(
+            (r: Response) => {
+              return new Response(r.body, {
+                status: STATUS_CODE.NotFound,
+              });
+            },
+          );
         } else {
           return r;
         }
