@@ -8,7 +8,7 @@
 import { serve } from "http/server.ts";
 import { serveDir, serveFile } from "http/file_server.ts";
 import { STATUS_CODE } from "http/status.ts";
-import { handle } from "./../dist/server/entry.mjs";
+import { handle } from "../server/entry.mjs";
 import { dirname, fromFileUrl, normalize, SEP } from "path/mod.ts";
 import { parse } from "toml/mod.ts";
 

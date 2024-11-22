@@ -1,6 +1,5 @@
 stages:
   - build
-  - compile
 
 build:
   stage: build
@@ -16,6 +15,8 @@ build:
   script:
     - pnpm install # install dependencies
     - pnpm build # build the project
+    - cp server/config.toml.tmpl server/config.toml
+    - cp -r server/ dist/deno
   cache:
     key:
       files:
@@ -25,17 +26,3 @@ build:
   artifacts:
     paths:
       - dist/
-
-compile:
-  stage: compile
-  dependencies:
-    - build
-  image:
-    name: denoland/deno:alpine-1.46.3
-    entrypoint: [""]
-  script:
-    - cd server && deno task compile
-    - rm -rfv ../dist/server
-  artifacts:
-    paths:
-    - dist/
