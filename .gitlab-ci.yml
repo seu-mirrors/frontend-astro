@@ -31,7 +31,7 @@ compile:
   dependencies:
     - build
   image:
-    name: denoland/deno:alpine
+    name: denoland/deno:alpine-1.46.3
     entrypoint: [""]
   script:
     - cd server && deno task compile
