@@ -7,6 +7,9 @@ build:
   image: node:20
   before_script:
     - npm config set registry https://registry.npmmirror.com
+    # bloody thank u node
+    # https://github.com/nodejs/corepack/issues/540
+    - export COREPACK_NPM_REGISTRY=$(npm config get registry)
     - corepack enable
     - corepack prepare pnpm@latest --activate
     - pnpm config set store-dir .pnpm-store
