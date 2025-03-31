@@ -5,7 +5,6 @@
  * root_dir = "/xxx"
  */
 
-import { serve } from "http/server.ts";
 import { serveDir, serveFile } from "http/file_server.ts";
 import { STATUS_CODE } from "http/status.ts";
 import { handle } from "../server/entry.mjs";
@@ -22,12 +21,14 @@ const CONFIG_FILE = `${dirname(PROG_PATH)}${SEP}config.toml`;
 
 interface Conf {
   root_dir: string;
+  hostname: string;
   port: number;
   prod: boolean;
 }
 
 let conf: Conf = {
   root_dir: DEFAULT_ROOT_DIR,
+  hostname: "localhost",
   port: 8085,
   prod: false,
 };
@@ -52,7 +53,8 @@ function exitWithError(errstr: string) {
   console.log("Using root dir " + conf.root_dir);
   console.log("Production flag: " + (conf.prod ? "true" : "false"));
 
-  serve(
+  Deno.serve(
+    { hostname: conf.hostname, port: conf.port },
     (req: Request) => {
       const pathname = new URL(req.url).pathname;
       if (pathname === "/" || pathname.startsWith("/status")) {
@@ -78,7 +80,6 @@ function exitWithError(errstr: string) {
           return r;
         }
       });
-    },
-    { port: conf.port },
+    }
   );
 })();
