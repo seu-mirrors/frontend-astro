@@ -2,6 +2,9 @@ stages:
   - build
 
 build:
+  only:
+    - ssr
+    - main
   stage: build
   image: node:20
   before_script:
