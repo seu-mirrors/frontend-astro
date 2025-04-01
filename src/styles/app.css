@@ -299,3 +299,44 @@ a:hover {
 #theme-toggle:focus {
   outline: none;
 }
+
+/* Logo 相关样式 */
+/* Light */
+.light-logo {
+  display: block;
+}
+
+.dark-logo {
+  display: none;
+}
+
+/* Dark */
+html.dark .light-logo {
+  display: none;
+}
+
+html.dark .dark-logo {
+  display: block;
+}
+
+/* 系统亮色模式下，暗色主题 */
+@media (prefers-color-scheme: light) {
+  html.dark .light-logo {
+    display: none;
+  }
+  
+  html.dark .dark-logo {
+    display: block;
+  }
+}
+
+/* 系统暗色模式下，亮色主题 */
+@media (prefers-color-scheme: dark) {
+  html:not(.dark) .light-logo {
+    display: block;
+  }
+  
+  html:not(.dark) .dark-logo {
+    display: none;
+  }
+}
