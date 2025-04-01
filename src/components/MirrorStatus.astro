@@ -38,7 +38,7 @@ try {
       </colgroup>
 
       <thead>
-        <tr class="row bg-gray-200 text-stone-800">
+        <tr class="row bg-gray-200 dark:bg-gray-700 text-stone-800 dark:text-gray-100">
           <th class="p-2">Name</th>
           <th class="p-2">Next Schedule</th>
           <th class="p-2">Upstream</th>
@@ -51,11 +51,11 @@ try {
         {!fetchError && mirrorStatus.map((mirror) => (
           <tr
             class={(() => {
-              let cls = ["hover:bg-[#f4f6f7] border-t-2"];
+              let cls = ["hover:bg-[#f4f6f7] dark:hover:bg-gray-700 border-t-2 dark:border-gray-700"];
               if (mirror.status == "syncing") {
-                cls.push("bg-amber-100	");
+                cls.push("bg-amber-100 dark:bg-amber-900/30");
               } else if (mirror.status == "failed") {
-                cls.push("bg-red-100");
+                cls.push("bg-red-100 dark:bg-red-900/30");
               }
               return cls.join(" ");
             })()}>
