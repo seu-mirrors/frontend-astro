@@ -17,29 +17,41 @@ import ComputerIcon from "astro-heroicons/outline/ComputerDesktop.astro";
           alt="SEU Logo"
         />
         <span class="text-xl"
-          >东南大学开源镜像站 <span class="text-neutral-400 dark:text-neutral-500">/</span> SEU Mirrors<sup
-            class="text-[#587b37] dark:text-[#7ab149] ml-0.5">β</sup
+          >东南大学开源镜像站 <span
+            class="text-neutral-400 dark:text-neutral-500">/</span
+          > SEU Mirrors<sup class="text-[#587b37] dark:text-[#7ab149] ml-0.5"
+            >β</sup
           ></span
         >
       </a>
 
       <div class="space-x-4 header-nav max-sm:mt-6">
-        <a class:list={["rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700", { active: location === "/" }]} href="/"
-          >首页</a
+        <a
+          class:list={[
+            "rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700",
+            { active: location === "/" },
+          ]}
+          href="/">首页</a
         >
         <a
-        class:list={["rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700", { active: location.startsWith("/news") }]}
-        href="/news/">新闻公告</a
-      >
+          class:list={[
+            "rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700",
+            { active: location.startsWith("/news") },
+          ]}
+          href="/news/">新闻公告</a
+        >
         <a
-          class:list={["rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700", { active: location.startsWith("/status") }]}
+          class:list={[
+            "rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700",
+            { active: location.startsWith("/status") },
+          ]}
           href="/status">同步状态</a
         >
-        
+
         <!-- 主题切换按钮 -->
-        <button 
-          id="theme-toggle" 
-          aria-label="切换主题模式" 
+        <button
+          id="theme-toggle"
+          aria-label="切换主题模式"
           title="切换主题模式"
           class="p-2 translate-y-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none transition-colors duration-200 focus:ring-2 focus:ring-gray-300 dark:focus:ring-gray-600">
           <ComputerIcon id="theme-icon-system" class="w-5 h-5" />
@@ -50,11 +62,47 @@ import ComputerIcon from "astro-heroicons/outline/ComputerDesktop.astro";
     </div>
 
     <div class={location === "/" ? "mt-8 mb-4 space-y-2 basis-full" : "hidden"}>
-      <h1 class="font-medium text-black dark:text-white text-4xl">稳定、可靠的开源镜像服务</h1>
-      <p class="text-xl dark:text-gray-200">基于「快照」的原子化同步，无中间状态，始终完整。</p>
+      <h1 class="font-medium text-black dark:text-white text-4xl">
+        稳定、可靠的开源镜像服务
+      </h1>
+      <p class="text-xl dark:text-gray-200">
+        基于「快照」的原子化同步，无中间状态，始终完整。
+      </p>
     </div>
   </div>
 </header>
+
+<style>
+  #theme-toggle {
+    position: relative;
+    overflow: hidden;
+  }
+
+  #theme-toggle::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background-color: currentColor;
+    border-radius: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+    transition:
+      opacity 0.2s,
+      transform 0.2s;
+  }
+
+  #theme-toggle.active::after {
+    opacity: 0.1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  #theme-toggle:focus {
+    outline: none;
+  }
+</style>
 
 <script>
   declare global {
@@ -70,45 +118,51 @@ import ComputerIcon from "astro-heroicons/outline/ComputerDesktop.astro";
   // 设置主题切换按钮事件
   function setupThemeToggle() {
     // console.log('设置主题切换按钮事件');
-    const toggleButton = document.getElementById('theme-toggle');
-    
+    const toggleButton = document.getElementById("theme-toggle");
+
     if (!toggleButton) return;
-    
-    if (toggleButton.getAttribute('data-theme-initialized') === 'true') {
+
+    if (toggleButton.getAttribute("data-theme-initialized") === "true") {
       return;
     }
-    
+
     // 标记已初始化
-    toggleButton.setAttribute('data-theme-initialized', 'true');
-    
+    toggleButton.setAttribute("data-theme-initialized", "true");
+
     // 添加点击事件
-    toggleButton.addEventListener('click', (e) => {
+    toggleButton.addEventListener("click", (e) => {
       e.preventDefault(); // 防止事件冒泡
-      console.log('主题切换按钮被点击');
-      
+      console.log("主题切换按钮被点击");
+
       // 立即显示视觉反馈
-      toggleButton.classList.add('active');
-      setTimeout(() => toggleButton.classList.remove('active'), 200);
-      
+      toggleButton.classList.add("active");
+      setTimeout(() => toggleButton.classList.remove("active"), 200);
+
       // 使用主题管理器切换主题
-      if (window.themeManager && typeof window.themeManager.toggleTheme === 'function') {
+      if (
+        window.themeManager &&
+        typeof window.themeManager.toggleTheme === "function"
+      ) {
         window.themeManager.toggleTheme();
       } else {
-        console.error('主题管理器未初始化或toggleTheme方法不可用');
+        console.error("主题管理器未初始化或toggleTheme方法不可用");
       }
     });
-    
+
     // 确保图标状态与当前主题匹配
-    if (window.themeManager && typeof window.themeManager.updateThemeUI === 'function') {
+    if (
+      window.themeManager &&
+      typeof window.themeManager.updateThemeUI === "function"
+    ) {
       const currentTheme = window.themeManager.getCurrentTheme();
       window.themeManager.updateThemeUI(currentTheme);
     }
   }
 
   // 初始加载时设置
-  document.addEventListener('DOMContentLoaded', setupThemeToggle);
-  
+  document.addEventListener("DOMContentLoaded", setupThemeToggle);
+
   // Astro View Transitions支持
-  document.addEventListener('astro:page-load', setupThemeToggle);
-  document.addEventListener('astro:after-swap', setupThemeToggle);
+  document.addEventListener("astro:page-load", setupThemeToggle);
+  document.addEventListener("astro:after-swap", setupThemeToggle);
 </script>

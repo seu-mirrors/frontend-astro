@@ -3,24 +3,76 @@ import ExternalLink from "./ExternalLink.astro";
 ---
 
 <footer
-  class="relative flex flex-wrap w-full items-center justify-between bg-white dark:bg-gray-800 text-neutral-900 dark:text-gray-200 caddy-shadow px-caddy py-6 grow-0 shrink-0">
+  class="relative w-full bg-white dark:bg-gray-800 text-neutral-900 dark:text-gray-200 caddy-shadow px-caddy py-6 grow-0 shrink-0">
   <div class="caddy-wrapper">
-    <div class="flex max-w-caddy flex-wrap items-center basis-full justify-between">
-      <div class="text-sm max-w-[80%]">
+    <div
+      class="flex max-w-caddy flex-nowrap items-start basis-full justify-between">
+      <div class="text-sm shrink">
         <p>
           本站由 <ExternalLink href="https://nic.seu.edu.cn">
             东南大学网络与信息中心
-          </ExternalLink> 支持创办，由东南大学 SiliCOM 协会与 <ExternalLink href="https://seulinux.com/">东南大学 Linux 俱乐部</ExternalLink> 运行维护。
+          </ExternalLink> 支持创办，由东南大学 SiliCOM 协会与 <ExternalLink
+            href="https://seulinux.com/">东南大学 Linux 俱乐部</ExternalLink
+          > 运行维护。
         </p>
-        <p>使用 <ExternalLink href="https://astro.build/">{Astro.generator}</ExternalLink> 构建，运行于 <ExternalLink href="https://deno.com/">Deno</ExternalLink> 之上。</p>
+        <p>
+          前端使用 <ExternalLink href="https://astro.build/"
+            >{Astro.generator}</ExternalLink
+          > 构建，运行于 <ExternalLink href="https://deno.com/"
+            >Deno</ExternalLink
+          > 之上。
+        </p>
       </div>
 
-      <div>
-        <a href="https://seulinux.com/" target="_blank" rel="noopener">
-          <img src="/linux-club-logo.svg" class="light-logo min-w-[20%] h-12">
-          <img src="/linux-club-logo-white.svg" class="dark-logo min-w-[20%] h-12">
+      <div class="min-w-12 flex flex-col">
+        <a href="https://seulinux.com/" target="_blank" rel="noopener" class="self-end">
+          <img src="/linux-club-logo.svg" class="light-logo h-12" />
+          <img src="/linux-club-logo-white.svg" class="dark-logo h-12" />
         </a>
       </div>
     </div>
   </div>
 </footer>
+
+<style>
+  /* Logo 相关样式 */
+  /* Light */
+  .light-logo {
+    display: block;
+  }
+
+  .dark-logo {
+    display: none;
+  }
+
+  /* Dark */
+  html.dark .light-logo {
+    display: none;
+  }
+
+  html.dark .dark-logo {
+    display: block;
+  }
+
+  /* 系统亮色模式下，暗色主题 */
+  @media (prefers-color-scheme: light) {
+    html.dark .light-logo {
+      display: none;
+    }
+
+    html.dark .dark-logo {
+      display: block;
+    }
+  }
+
+  /* 系统暗色模式下，亮色主题 */
+  @media (prefers-color-scheme: dark) {
+    html:not(.dark) .light-logo {
+      display: block;
+    }
+
+    html:not(.dark) .dark-logo {
+      display: none;
+    }
+  }
+</style>
