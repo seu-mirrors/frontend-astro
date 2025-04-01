@@ -39,5 +39,10 @@
     white-space: nowrap;
     /* Retrive content from html data-label */
     content: attr(data-label);
+    font-weight: bold;
+  }
+  
+  .dark td:before {
+    color: #d1d5db; /* gray-300 */
   }
 }

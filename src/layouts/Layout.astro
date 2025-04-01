@@ -6,7 +6,6 @@ interface Props {
 const { title } = Astro.props;
 const renderTitle = title === '' ? '东南大学开源镜像站 / SEU Mirrors' : `${title} - 东南大学开源镜像站 / SEU Mirrors`;
 import "../styles/app.css";
-
 import { ViewTransitions } from "astro:transitions";
 ---
 
@@ -15,14 +14,339 @@ import { ViewTransitions } from "astro:transitions";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <ViewTransitions />
     <title>{renderTitle}</title>
+    
+    <!-- 防止闪烁，在DOM加载前应用主题 -->
+    <script>
+      (function() {
+        const THEME_KEY = 'theme';
+        const Theme = {
+          SYSTEM: 'system',
+          LIGHT: 'light',
+          DARK: 'dark'
+        };
+        
+        const theme = localStorage.getItem(THEME_KEY) || Theme.SYSTEM;
+        const html = document.documentElement;
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        html.classList.remove('dark');
+        
+        // 临时禁用过渡
+        html.classList.add('disable-transitions');
+        
+        // 更新meta标签
+        const metaColorScheme = document.querySelector('meta[name="color-scheme"]');
+        
+        // 根据主题设置应用相应的类
+        if (theme === Theme.DARK) {
+          // 深色模式
+          html.classList.add('dark');
+          if (metaColorScheme) metaColorScheme.setAttribute('content', 'dark');
+          // console.log('初始化为深色模式', html.className);
+        } else if (theme === Theme.LIGHT) {
+          // 浅色模式
+          if (metaColorScheme) metaColorScheme.setAttribute('content', 'light');
+          // console.log('初始化为浅色模式', html.className);
+        } else if (theme === Theme.SYSTEM && prefersDark) {
+          // 系统深色模式
+          html.classList.add('dark');
+          // console.log('初始化为系统深色模式', html.className);
+        } else {
+          // console.log('初始化为系统浅色模式', html.className);
+        }
+        
+        // 强制重排
+        void html.offsetHeight;
+        
+        // 页面加载后移除过渡禁用
+        window.addEventListener('DOMContentLoaded', function() {
+          setTimeout(function() {
+            html.classList.remove('disable-transitions');
+          }, 0);
+        });
+      })();
+    </script>
   </head>
-  <body>
-    <main class="flex flex-col min-h-screen">
+  <body class="dark:bg-gray-900">
+    <main class="flex flex-col min-h-screen dark:text-gray-100">
       <slot />
     </main>
   </body>
 </html>
+
+<!-- 主题管理器脚本 -->
+<script is:inline>
+  // 为Window添加自定义属性声明
+  window.themeManager = window.themeManager || {};
+  
+  // 定义主题类型
+  const Theme = {
+    SYSTEM: 'system',
+    LIGHT: 'light',
+    DARK: 'dark'
+  };
+  
+  class ThemeManager {
+    STORAGE_KEY = 'theme';
+  
+    /**
+     * 获取当前设置的主题
+     */
+    getCurrentTheme() {
+      return localStorage.getItem(this.STORAGE_KEY) || Theme.SYSTEM;
+    }
+  
+    /**
+     * 设置并应用主题
+     */
+    setTheme(theme) {
+      // console.log("设置主题为:", theme);
+      const html = document.documentElement;
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      // 停止所有正在进行的过渡动画
+      html.classList.add('disable-transitions');
+      
+      // 清除旧主题设置
+      html.classList.remove('dark');
+      
+      // 更新meta标签
+      const metaColorScheme = document.querySelector('meta[name="color-scheme"]');
+      
+      // 设置新主题
+      if (theme === Theme.DARK) {
+        // 深色模式
+        html.classList.add('dark');
+        if (metaColorScheme) metaColorScheme.setAttribute('content', 'dark');
+      } else if (theme === Theme.LIGHT) {
+        // 浅色模式 - 强制覆盖系统主题
+        if (metaColorScheme) metaColorScheme.setAttribute('content', 'light');
+      } else if (theme === Theme.SYSTEM && prefersDark) {
+        // 系统深色模式
+        html.classList.add('dark');
+        if (metaColorScheme) metaColorScheme.setAttribute('content', 'dark');
+      } else {
+        // 系统浅色模式
+        if (metaColorScheme) metaColorScheme.setAttribute('content', 'light');
+      }
+      
+      // 存储用户选择
+      localStorage.setItem(this.STORAGE_KEY, theme);
+      
+      // 强制重排
+      void html.offsetHeight;
+      
+      // 延迟移除过渡禁用
+      setTimeout(() => {
+        html.classList.remove('disable-transitions');
+        this.updateThemeUI(theme);
+        
+        // console.log("主题切换完成:", {
+        //   theme,
+        //   systemPrefersDark: prefersDark,
+        //   hasDarkClass: html.classList.contains('dark'),
+        //   colorScheme: metaColorScheme ? metaColorScheme.getAttribute('content') : 'unknown'
+        // });
+      }, 16);
+    }
+  
+    /**
+     * 循环切换主题
+     */
+    toggleTheme() {
+      const currentTheme = this.getCurrentTheme();
+      
+      // 按顺序切换：system -> light -> dark -> system
+      switch (currentTheme) {
+        case Theme.SYSTEM:
+          this.setTheme(Theme.LIGHT);
+          break;
+        case Theme.LIGHT:
+          this.setTheme(Theme.DARK);
+          break;
+        case Theme.DARK:
+          this.setTheme(Theme.SYSTEM);
+          break;
+        default:
+          this.setTheme(Theme.SYSTEM);
+      }
+    }
+  
+    /**
+     * 更新UI显示
+     */
+    updateThemeUI(theme) {
+      const themeToggle = document.getElementById('theme-toggle');
+      const systemIcon = document.getElementById('theme-icon-system');
+      const lightIcon = document.getElementById('theme-icon-light');
+      const darkIcon = document.getElementById('theme-icon-dark');
+      
+      if (!themeToggle || !systemIcon || !lightIcon || !darkIcon) return;
+      
+      // 隐藏所有图标
+      systemIcon.classList.add('hidden');
+      lightIcon.classList.add('hidden');
+      darkIcon.classList.add('hidden');
+      
+      // 显示当前主题图标
+      switch (theme) {
+        case Theme.SYSTEM:
+          systemIcon.classList.remove('hidden');
+          break;
+        case Theme.LIGHT:
+          lightIcon.classList.remove('hidden');
+          break;
+        case Theme.DARK:
+          darkIcon.classList.remove('hidden');
+          break;
+      }
+      
+      // 设置按钮提示文本
+      let tooltipText = '';
+      switch (theme) {
+        case Theme.SYSTEM:
+          tooltipText = '跟随系统 (点击切换到浅色模式)';
+          break;
+        case Theme.LIGHT:
+          tooltipText = '浅色模式 (点击切换到深色模式)';
+          break;
+        case Theme.DARK:
+          tooltipText = '深色模式 (点击切换到跟随系统)';
+          break;
+      }
+      
+      themeToggle.setAttribute('title', tooltipText);
+    }
+  
+    /**
+     * 设置系统主题变化监听器
+     */
+    setupSystemThemeListener() {
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      
+      // 监听系统主题变化
+      mediaQuery.addEventListener('change', (e) => {
+        if (this.getCurrentTheme() === Theme.SYSTEM) {
+          const html = document.documentElement;
+          const metaColorScheme = document.querySelector('meta[name="color-scheme"]');
+          
+          // 临时禁用过渡
+          html.classList.add('disable-transitions');
+          
+          // 根据系统主题设置
+          if (e.matches) {
+            // 系统切换到暗色
+            html.classList.add('dark');
+            if (metaColorScheme) metaColorScheme.setAttribute('content', 'dark');
+          } else {
+            // 系统切换到亮色
+            html.classList.remove('dark');
+            if (metaColorScheme) metaColorScheme.setAttribute('content', 'light');
+          }
+          
+          // 强制重排
+          void html.offsetHeight;
+          
+          // 延迟移除过渡禁用
+          setTimeout(() => {
+            html.classList.remove('disable-transitions');
+          }, 16);
+        }
+      });
+    }
+  
+    /**
+     * 初始化主题
+     */
+    initTheme() {
+      const currentTheme = this.getCurrentTheme();
+      this.setTheme(currentTheme);
+      this.setupSystemThemeListener();
+    }
+  }
+  
+  // 创建全局实例
+  window.themeManager = new ThemeManager();
+  
+  // 初始化
+  document.addEventListener('DOMContentLoaded', () => {
+    window.themeManager.initTheme();
+  });
+  
+  // 支持View Transitions：页面切换后重新初始化UI
+  document.addEventListener('astro:page-load', () => {
+    // console.log('页面加载完成，重新初始化主题UI');
+    if (window.themeManager) {
+      const currentTheme = window.themeManager.getCurrentTheme();
+      window.themeManager.updateThemeUI(currentTheme);
+    }
+  });
+  
+  // 支持View Transitions：页面内容替换后
+  document.addEventListener('astro:after-swap', () => {
+    // console.log('页面内容替换完成，确认主题应用');
+    if (window.themeManager) {
+      const currentTheme = window.themeManager.getCurrentTheme();
+      const html = document.documentElement;
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const metaColorScheme = document.querySelector('meta[name="color-scheme"]');
+      
+      // 临时禁用过渡
+      html.classList.add('disable-transitions');
+      
+      // 清除之前的主题设置
+      html.classList.remove('dark');
+      
+      // 重新应用当前主题
+      if (currentTheme === Theme.DARK) {
+        // 深色模式
+        html.classList.add('dark');
+        if (metaColorScheme) metaColorScheme.setAttribute('content', 'dark');
+      } else if (currentTheme === Theme.LIGHT) {
+        // 浅色模式 - 强制覆盖系统主题
+        if (metaColorScheme) metaColorScheme.setAttribute('content', 'light');
+      } else if (currentTheme === Theme.SYSTEM && prefersDark) {
+        // 系统深色模式
+        html.classList.add('dark');
+        if (metaColorScheme) metaColorScheme.setAttribute('content', 'dark');
+      } else {
+        // 系统浅色模式
+        if (metaColorScheme) metaColorScheme.setAttribute('content', 'light');
+      }
+      
+      // 强制重排，确保样式立即应用
+      void html.offsetHeight;
+      
+      // 在所有元素上强制应用主题
+      if (html.classList.contains('dark')) {
+        document.querySelectorAll('body, div, header, main, footer, section, article')
+          .forEach(el => el.classList.add('force-dark-apply'));
+      } else {
+        document.querySelectorAll('body, div, header, main, footer, section, article')
+          .forEach(el => el.classList.add('force-light-apply'));
+      }
+      
+      // 延迟移除过渡禁用和临时强制类
+      setTimeout(() => {
+        html.classList.remove('disable-transitions');
+        document.querySelectorAll('.force-dark-apply, .force-light-apply')
+          .forEach(el => {
+            el.classList.remove('force-dark-apply');
+            el.classList.remove('force-light-apply');
+          });
+        
+        // console.log('页面切换后确认主题：', {
+        //   theme: currentTheme,
+        //   systemPrefersDark: prefersDark,
+        //   hasDarkClass: html.classList.contains('dark'),
+        //   colorScheme: metaColorScheme ? metaColorScheme.getAttribute('content') : 'unknown'
+        // });
+      }, 16);
+    }
+  });
+</script>

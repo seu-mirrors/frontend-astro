@@ -23,5 +23,5 @@ export default {
   variants: {
     extend: {},
   },
-  darkmode: false, // or 'media' or 'class'
+  darkMode: 'class',
 };

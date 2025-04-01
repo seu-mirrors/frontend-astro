@@ -6,4 +6,4 @@ const { news } = Astro.props;
   {news.data.title}
 </a>
 
-<span class="text-sm text-gray-700"> - {news.data.pubDate.toISOString().slice(0, 10).replaceAll('-', '/')}</span>
+<span class="text-sm text-gray-700 dark:text-gray-300"> - {news.data.pubDate.toISOString().slice(0, 10).replaceAll('-', '/')}</span>

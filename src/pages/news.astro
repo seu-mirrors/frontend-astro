@@ -22,7 +22,7 @@ export const prerender = true;
 <Layout title="新闻公告">
   <Header />
   <div
-    class="caddy-wrapper flex flex-wrap bg-white text-neutral-900 gap-0 lg:divide-x max-lg:divide-y caddy-main grow">
+    class="caddy-wrapper flex flex-wrap bg-white dark:bg-gray-800 text-neutral-900 dark:text-gray-100 gap-0 lg:divide-x max-lg:divide-y dark:divide-gray-700 caddy-main grow">
     <div class="px-4 py-3 flex flex-col w-full">
       <p class="font-medium text-xl flex items-center">
         <Newspaper class="w-6 h-6 mr-2" />
@@ -34,7 +34,7 @@ export const prerender = true;
           news.map((item) => (
             <div class="py-2">
               <h3 class="text-xl"><a href={`/news/${item.slug}/`}>{item.data.title}</a></h3>
-              <span class="text-gray-700 text-sm inline-flex items-center mt-1">
+              <span class="text-gray-700 dark:text-gray-300 text-sm inline-flex items-center mt-1">
                 <User class="w-4 h-4 mr-1" />
                 {item.data.author}
                 <span class="mx-1">·</span>
