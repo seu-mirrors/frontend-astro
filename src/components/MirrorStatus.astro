@@ -52,7 +52,7 @@ try {
           <tr
             class={(() => {
               let cls = ["hover:bg-[#f4f6f7] dark:hover:bg-gray-700 border-t-2 dark:border-gray-700"];
-              if (mirror.status == "syncing") {
+              if (mirror.status == "syncing" || mirror.status == "pre-syncing") {
                 cls.push("bg-amber-100 dark:bg-amber-900/30");
               } else if (mirror.status == "failed") {
                 cls.push("bg-red-100 dark:bg-red-900/30");
