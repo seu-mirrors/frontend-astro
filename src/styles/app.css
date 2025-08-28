@@ -1,8 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-@tailwind variants;
-
+@import "./tailwind.css";
+@import "tailwindcss" reference;
 
 :root {
   --color-bg: #f4f6f7;
@@ -65,12 +62,7 @@ html.dark .dark\:text-gray-300 { color: #d1d5db; }
 
   /* 系统亮色下的暗色主题图标要反转 */
   html.dark .dark\:invert {
-    --tw-invert: invert(100%);
-    filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-  }
-
-  html.dark .invert-0 {
-    --tw-invert: invert(100%);
+    --tw-invert: invert(100%) !important;
     filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
   }
 
@@ -219,6 +211,12 @@ html.dark .dark\:text-gray-300 { color: #d1d5db; }
     --tw-ring-color: rgb(209 213 219); /* gray-300 */
     --tw-ring-opacity: 1;
   }
+
+  /* 系统暗色下的手动暗色主题图标要反转 */
+  html.dark .dark\:invert {
+    --tw-invert: invert(100%) !important;
+    filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+  }
 }
 
 .disable-transitions,
@@ -232,7 +230,7 @@ html.dark .dark\:text-gray-300 { color: #d1d5db; }
   }
 
   .caddy-wrapper {
-    @apply mx-auto max-w-caddy w-full dark:bg-gray-800;
+    @apply mx-auto max-w-[1200px] w-full dark:bg-gray-800;
   }
 
   .caddy-main {
@@ -247,6 +245,10 @@ html.dark .dark\:text-gray-300 { color: #d1d5db; }
 
   .header-nav > a.active {
     @apply border-slate-300 dark:border-slate-600 border-solid;
+  }
+
+  a:hover {
+    @apply underline underline-offset-2;
   }
 }
 
@@ -266,8 +268,4 @@ sup {
 sub {
   bottom: -0.25em;
   vertical-align: sub;
-}
-
-a:hover {
-  @apply underline underline-offset-2;
 }

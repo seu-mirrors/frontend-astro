@@ -1,8 +1,8 @@
-import Typography from "@tailwindcss/typography";
+import typography from "@tailwindcss/typography";
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  plugins: [Typography,],
+  plugins: [typography],
   theme: {
     extend: {
       maxWidth: {
@@ -13,15 +13,12 @@ export default {
       },
       screens: {
         "lg": "800px",
-      }
-    },
-    letterSpacing: {
-      wide: ".015em",
+      },
+      letterSpacing: {
+        wide: ".015em",
+      },
     },
   },
   content: ["./src/**/*.{svelte,js,ts,astro}"], //for unused css
-  variants: {
-    extend: {},
-  },
   darkMode: 'class',
 };

@@ -2,7 +2,13 @@
  * Ref: https://css-tricks.com/responsive-data-tables/
  */
 
-/* tailwind css lg: 960px */
+@media only screen and (min-width: 957px) and (max-width: 1023px) {
+  td {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+}
+
 @media only screen and not (min-width: 800px) {
   /* Force table to not be like tables anymore */
   table,
