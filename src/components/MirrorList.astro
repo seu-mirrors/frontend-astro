@@ -12,6 +12,7 @@ try {
     });
     return status;
   })();
+  mirrorStatus.push({name: "pypi", last_update: "N/A"});
 } catch(e) {
   fetchError = true;
   errMsg = e.message;
