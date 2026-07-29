@@ -6,14 +6,14 @@ build:
     - ssr
     - main
   stage: build
-  image: node:20
+  image: node:22
   before_script:
     - npm config set registry https://registry.npmmirror.com
     # bloody thank u node
     # https://github.com/nodejs/corepack/issues/540
     - export COREPACK_NPM_REGISTRY=$(npm config get registry)
     - corepack enable
-    - corepack prepare pnpm@latest --activate
+    - corepack prepare pnpm@10.34.5 --activate
     - pnpm config set store-dir .pnpm-store
   script:
     - pnpm install # install dependencies
